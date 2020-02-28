@@ -7,8 +7,8 @@ var ctx = convas.getContext('2d')
 
 /// NOTE: Variables
 const mouse = {
-  x: innerWidth / 2,
-  y: innerHeight / 2
+  x: 20,
+  y: 20
 }
 
 const colors = [
@@ -46,6 +46,7 @@ function getDistance(x1, y1, x2, y2) {
   let xDistance = x2 - x1
   let yDistance = y2 - y1
 
+  return Math.sqrt(Math.pow(xDistance, 2) + Math.pow(yDistance, 2))
 }
 
 class Circle {
@@ -85,6 +86,14 @@ function animate() {
   Circle2.y = mouse.y
   Circle1.update()
   Circle2.update()
+
+  const distance = getDistance(Circle1.x, Circle1.y, Circle2.x, Circle2.y)
+  if (distance < Circle1.radius + Circle2.radius) {
+    Circle1.color = 'red'
+  } else {
+    Circle1.color = 'blue'
+  }
+
 }
 
 init()
